@@ -16,6 +16,7 @@ RUN npm run build
 
 # https://github.com/sclorg/nginx-container
 FROM registry.access.redhat.com/ubi8/nginx-118
+USER nginx
 
 LABEL version="1.0"
 LABEL description="To Do List application front-end"
@@ -24,5 +25,5 @@ LABEL updatedDate="2021-05-19"
 
 COPY nginx.conf /etc/nginx/
 COPY --from=appbuild /tmp/todo-frontend/build /usr/share/nginx/html
-
+EXPOSE 8080
 CMD nginx -g "daemon off;"
